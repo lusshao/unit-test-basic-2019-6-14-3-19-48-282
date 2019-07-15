@@ -7,6 +7,7 @@ import ExpenseService.Project.ProjectType;
 import org.junit.jupiter.api.Test;
 import org.omg.CORBA.INTERNAL;
 
+import static ExpenseService.Expense.ExpenseType.EXPENSE_TYPE_A;
 import static ExpenseService.Expense.ExpenseType.INTERNAL_PROJECT_EXPENSE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
@@ -15,19 +16,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class ExpenseServiceTest {
     @Test
     void should_return_internal_expense_type_if_project_is_internal() throws UnexpectedProjectTypeException {
-        // given
         Project project = new Project(ProjectType.INTERNAL,"1111111111111");
-        ExpenseService expenseService = new ExpenseService();
-        // when
-        // then
+
         assertEquals(ExpenseService.getExpenseCodeByProjectTypeAndName(project),INTERNAL_PROJECT_EXPENSE);
     }
 
     @Test
     void should_return_expense_type_A_if_project_is_external_and_name_is_project_A() throws UnexpectedProjectTypeException {
-        // given
-        // when
-        // then
+        Project project = new Project(ProjectType.EXTERNAL,"Project A");
+
+        assertEquals(ExpenseService.getExpenseCodeByProjectTypeAndName(project),EXPENSE_TYPE_A);
     }
 
     @Test
